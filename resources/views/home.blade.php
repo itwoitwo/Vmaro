@@ -16,6 +16,9 @@
 
                     {{ __('You are logged in!') }}
                 </div>
+                <div class="card-body">
+                ようこそ{!! $user->id_name !!}さん
+                </div>
             </div>
         </div>
     </div>

@@ -19,7 +19,7 @@ class User extends Authenticatable
         'id', 
         'avatar',
         'name',
-        'screen_name',
+        'id_name',
     ];
 
     /**

@@ -20,8 +20,8 @@ class CreateUsersTable extends Migration
             $table->string('avatar')->nullable();
             // 名前 name
             $table->string('name');
-            // @name screen_name
-            $table->string('screen_name');
+            // @name id_name
+            $table->string('id_name');
             $table->rememberToken();
             $table->timestamps();
         });

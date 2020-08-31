@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
-
+use Laravel\Socialite\Facades\Socialite;
+use App\User;
+use Illuminate\Support\Facades\Auth;
 class LoginController extends Controller
 {
     /*
@@ -37,4 +39,43 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
     }
+
+    public function redirectToProvider()
+    {
+        return Socialite::driver('twitter')->redirect();
+    }
+
+    public function handleProviderCallback()
+    {
+        $userInfo = Socialite::driver('twitter')->user();
+
+        //ユーザー情報の取得
+        $user = User::find($userInfo->user['id_str']);
+
+        if($user){
+            if($user->id_name != $userInfo->nickname || $user->avatar != $userInfo->avatar){
+                $user->id_name = $userInfo->nickname;
+                $user->avatar = $userInfo->avatar;
+                $user->save();
+            }
+        } else {
+        //ユーザー登録
+            User::create([
+                'id' => $userInfo->user['id_str'],
+                'avatar' => $userInfo->avatar,
+                'name' => $userInfo->nickname,
+                'id_name' => $userInfo->nickname,
+                ]);
+        }
+
+        auth()->login($user, true);
+        return redirect()->to('/home');
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect('/');
+    }
+
 }
