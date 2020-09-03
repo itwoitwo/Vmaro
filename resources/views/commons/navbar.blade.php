@@ -9,7 +9,7 @@
         <div class="collapse navbar-collapse" id="nav-bar">
             <ul class="navbar-nav mr-auto"></ul>
             <ul class="navbar-nav">
-                @if(isset($user))　<!-- あとでAuthに変える -->
+                @if(Auth::check())
                 <li class="nav-item"><a href="/users/{{$user->id_name}}" class="nav-link">投票所</a></li>
                 <li class="nav-item"><a href="/messagebox" class="nav-link">受信箱</a></li>
                 <li class="nav-item"><a href="/followlist" class="nav-link">フォローリスト</a></li>

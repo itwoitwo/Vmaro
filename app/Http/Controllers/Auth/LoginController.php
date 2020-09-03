@@ -66,6 +66,8 @@ class LoginController extends Controller
                 'name' => $userInfo->nickname,
                 'id_name' => $userInfo->nickname,
                 ]);
+
+            $user = User::find($userInfo->user['id_str']);
         }
 
         auth()->login($user, true);
