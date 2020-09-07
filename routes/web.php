@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/','VmarosController@index');
+Route::get('/','VmaroController@index');
 Route::get('login/twitter', 'Auth\LoginController@redirectToProvider')->name('loginTwitter');
 Route::get('login/twitter/callback', 'Auth\LoginController@handleProviderCallback');
 Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
