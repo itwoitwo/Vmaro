@@ -20,4 +20,6 @@ Route::get('logout', 'Auth\LoginController@logout')->name('logout.get');
 
 Auth::routes();
 
+Route::get('users/{id}', 'UsersController@show');
+
 Route::get('/home', 'HomeController@index')->name('home');

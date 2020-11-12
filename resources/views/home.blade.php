@@ -18,6 +18,7 @@
                 </div>
                 <div class="card-body">
                 ようこそ{!! $user->id_name !!}さん
+                名前は{!! $user->name !!}
                 </div>
             </div>
         </div>

@@ -53,17 +53,21 @@ class LoginController extends Controller
         $user = User::find($userInfo->user['id_str']);
 
         if($user){
-            if($user->id_name != $userInfo->nickname || $user->avatar != $userInfo->avatar){
-                $user->id_name = $userInfo->nickname;
-                $user->avatar = $userInfo->avatar;
-                $user->save();
-            }
+            if($user->id_name != $userInfo->nickname 
+            || $user->avatar != $userInfo->avatar
+            || $user->name != $userInfo->name)
+                {
+                    $user->id_name = $userInfo->nickname;
+                    $user->avatar = $userInfo->avatar;
+                    $user->name = $userInfo->name;
+                    $user->save();
+                }
         } else {
         //ユーザー登録
             User::create([
                 'id' => $userInfo->user['id_str'],
                 'avatar' => $userInfo->avatar,
-                'name' => $userInfo->nickname,
+                'name' => $userInfo->name,
                 'id_name' => $userInfo->nickname,
                 ]);
 
